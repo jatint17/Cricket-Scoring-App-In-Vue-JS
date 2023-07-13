@@ -69,7 +69,7 @@ const app = createApp({
     changeStrike(scoreValue) {
       if (Number(scoreValue) % 2 != 0) {
         //change strike
-        console.log('change strike', order);
+        console.log('change strike');
       }
     }
   }
