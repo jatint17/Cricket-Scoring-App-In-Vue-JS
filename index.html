@@ -10,19 +10,20 @@
     <style>
         html {
             font-family: 'Poppies', sans-serif;
-            color: rgb(236, 235, 235);
-            background-color: #222225;
+            color: #fff;
+            background-color: #181d24;
             padding-left: 20px;
         }
 
+        h1,
         h2 {
-            color: rgb(173, 203, 248);
+            color: #fff;
         }
 
         button {
             margin: 10px;
             margin-left: 0px;
-            background-color: rgb(184, 184, 184);
+            background-color: #e0ebeb;
             color: black;
             border: none;
             width: 50px;
@@ -39,6 +40,21 @@
             width: 50px;
             background-color: rgb(219, 219, 219);
         }
+
+        #csxi {
+            background-color: #6dbdaa;
+            color: #181d24;
+            width: 50%;
+            padding-left: 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-right: 30px;
+            border-radius: 5px;
+        }
+
+        #batsman-scorecard {
+            border-bottom: 1px solid black;
+        }
     </style>
 </head>
 
@@ -47,22 +63,24 @@
         <h1>🏏 Cricket Scoring App in Vue.JS</h1>
         <h2>Module {{moduleNo}}</h2>
         <h2>{{moduleName}}</h2>
+        <!-- <img style="float:right;width:38.5%;padding-right:120px;" src="https://staticg.sportskeeda.com/wp-content/uploads/2016/09/pitch-map-credit-timesuk-1474281720-800.jpg"> -->
         <div v-if:id="cont">
             <div v-if:id="cpxi">
                 <ul v-for="(player,order) in playingXi">{{order+1}}) {{player.name}}</ul>
                 <button style="margin-top:20px;" @click="confirmPlayingXi">OK</button>
             </div>
 
-            <div v-if:id="csxi">
+            <div v-if="csxi" id="csxi">
                 <button v-for="(item, key, index) in scoringOptions" :key="key"
                     @click="increaseScore(key)">{{item}}</button>
                 <div v-if="displayExtras">
                     Extras + <input type="text" id="extras_amount" v-model="extrasAmount" /> runs
-                    <button style="margin-left:20px;height:20px;"@click="calculateExtras">OK</button>
+                    <button style="margin-left:20px;height:20px;" @click="calculateExtras">OK</button>
                 </div>
                 <h3>ENG {{score}}-{{wickets}} ({{overs}}) overs</h3>
-                <ul v-for="(player,order) in playingXi">{{player.name}} <span></span> <span
-                        style="float: right;padding-right:500px;">{{player.runs}} ({{player.balls}})</span></ul>
+                <ul id="batsman-scorecard" v-for="(player,order) in playingXi">{{player.name}} <span></span> <span
+                        style="float: right;padding-right:75px;">{{player.runs}} ({{player.balls}})</span></ul>
+                <p>Extras: {{totalExtras}}</p>
             </div>
         </div>
         <div v-else="cont">

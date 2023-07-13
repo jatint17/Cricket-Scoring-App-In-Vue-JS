@@ -5,7 +5,6 @@ const app = createApp({
     return {
       moduleNo: 1,
       moduleName: 'Confirm your playing 11',
-      // playingXi: ['Cook', 'Strauss', 'Trott', 'Bell', 'Pietersen', 'Collingwood', 'Prior', 'Swann', 'Broad', 'Anderson', 'Finn'],
       playingXi: [{ name: 'Cook', runs: 0, balls: 0 }, { name: 'Strauss', runs: 0, balls: 0 }, { name: 'Trott', runs: 0, balls: 0 }, { name: 'Bell', runs: 0, balls: 0 }, { name: 'Pietersen', runs: 0, balls: 0 }, { name: 'Collingwood', runs: 0, balls: 0 }, { name: 'Prior', runs: 0, balls: 0 }, { name: 'Swann', runs: 0, balls: 0 }, { name: 'Broad', runs: 0, balls: 0 }, { name: 'Anderson', runs: 0, balls: 0 }, { name: 'Finn', runs: 0, balls: 0 }],
       cpxi: true,
       csxi: false,
@@ -18,7 +17,8 @@ const app = createApp({
       strike: '*',
       activeBatsman: 1,
       displayExtras: false,
-      extrasAmount: 0
+      extrasAmount: 0,
+      totalExtras: 0
     }
   },
 
@@ -78,14 +78,12 @@ const app = createApp({
       }
     },
     calculateBatsmanScore(scoreValue) {
-      console.log(scoreValue)
       this.playingXi[this.wickets].runs += Number(scoreValue)
-      console.log(this.playingXi[this.wickets].runs)
     },
     calculateExtras() {
       this.score = 1 + Number(this.score) + Number(this.extrasAmount)
-      console.log('wuhu' + Number(this.score))
       this.displayExtras = false
+      this.totalExtras += 1 + Number(this.extrasAmount)
     }
   }
 
