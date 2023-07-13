@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue JS Options API</title>
+    <title>Cricket Scoring App</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
         html {
@@ -20,32 +20,49 @@
         }
 
         button {
-            margin: 20px;
+            margin: 10px;
+            margin-left: 0px;
             background-color: rgb(184, 184, 184);
             color: black;
             border: none;
             width: 50px;
             height: 30px;
         }
+
+        ul {
+            margin: 0px;
+            padding: 0px;
+            padding-bottom: 5px;
+        }
+
+        #extras-amount {
+            width: 50px;
+            background-color: rgb(219, 219, 219);
+        }
     </style>
 </head>
 
 <body>
     <div id="app">
-        <h1>Cricket Scoring App in Vue.JS</h1>
+        <h1>🏏 Cricket Scoring App in Vue.JS</h1>
         <h2>Module {{moduleNo}}</h2>
         <h2>{{moduleName}}</h2>
         <div v-if:id="cont">
             <div v-if:id="cpxi">
-                <li v-for="player in playingXi">{{player}}</li>
-                <button @click="confirmPlayingXi">OK</button>
+                <ul v-for="(player,order) in playingXi">{{order+1}}) {{player.name}}</ul>
+                <button style="margin-top:20px;" @click="confirmPlayingXi">OK</button>
             </div>
 
             <div v-if:id="csxi">
                 <button v-for="(item, key, index) in scoringOptions" :key="key"
                     @click="increaseScore(key)">{{item}}</button>
+                <div v-if="displayExtras">
+                    Extras + <input type="text" id="extras_amount" v-model="extrasAmount" /> runs
+                    <button style="margin-left:20px;height:20px;"@click="calculateExtras">OK</button>
+                </div>
                 <h3>ENG {{score}}-{{wickets}} ({{overs}}) overs</h3>
-                <ul v-for="(player,order) in playingXi">{{player}}</ul>
+                <ul v-for="(player,order) in playingXi">{{player.name}} <span></span> <span
+                        style="float: right;padding-right:500px;">{{player.runs}} ({{player.balls}})</span></ul>
             </div>
         </div>
         <div v-else="cont">
